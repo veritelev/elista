@@ -4,9 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <styles>
+        #myDiv {
+  width: 200px;
+  height: 200px;
+  background-color: lightblue;
+  transform-origin: top left;
+  touch-action: none;
+  transform: scale(1);
+}
+    </styles>
 </head>
 <body style="display: flex; gap: 100px; flex-wrap: wrap">
-    <input type="checkbox" style="height:16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center; color: #ffffff">
+    <div  id="myDiv">
+        <input type="checkbox" style="height:16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center; color: #ffffff">
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center; color: #ffffff">
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center;color: #ffffff">
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center;color: #ffffff">
@@ -15,5 +26,42 @@
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center;color: #ffffff">
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center;color: #ffffff">
     <input type="checkbox" style="height: 16px; width: 16px; background-color: #444444; display: flex; border-radius: 20px; align-items: center; justify-content: center;color: #ffffff">
-</body>
+
+    </div>
+    <script>
+        const div = document.getElementById('myDiv');
+let startDistance = 0;
+let currentScale = 1;
+
+div.addEventListener('touchstart', (event) => {
+  if (event.touches.length === 2) {
+    startDistance = Math.sqrt(
+      Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
+      Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
+    );
+  }
+});
+
+div.addEventListener('touchmove', (event) => {
+  if (event.touches.length === 2) {
+    const newDistance = Math.sqrt(
+      Math.pow(event.touches[0].clientX - event.touches[1].clientX, 2) +
+      Math.pow(event.touches[0].clientY - event.touches[1].clientY, 2)
+    );
+
+    if (startDistance > 0) {
+      const scaleChange = newDistance / startDistance;
+      currentScale += scaleChange - 1;
+      currentScale = Math.max(0.5, Math.min(2, currentScale)); // Ограничение масштаба
+      div.style.transform = `scale(${currentScale})`;
+      startDistance = newDistance;
+    }
+  }
+});
+
+div.addEventListener('touchend', (event) => {
+  startDistance = 0;
+});
+    </script>
+    </body>
 </html>
