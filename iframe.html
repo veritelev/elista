@@ -62,6 +62,40 @@ div.addEventListener('touchmove', (event) => {
 div.addEventListener('touchend', (event) => {
   startDistance = 0;
 });
+        const draggableDiv = document.getElementById('myDiv');
+
+let isDragging = false;
+let startX, startY;
+let currentX, currentY;
+
+draggableDiv.addEventListener('touchstart', (event) => {
+  isDragging = true;
+  startX = event.touches[0].clientX;
+  startY = event.touches[0].clientY;
+  currentX = parseFloat(draggableDiv.style.left) || 0;
+  currentY = parseFloat(draggableDiv.style.top) || 0;
+});
+
+draggableDiv.addEventListener('touchmove', (event) => {
+  if (isDragging) {
+    event.preventDefault(); // Предотвращает скролл при перемещении
+    const touchX = event.touches[0].clientX;
+    const touchY = event.touches[0].clientY;
+
+    const diffX = touchX - startX;
+    const diffY = touchY - startY;
+
+    currentX = currentX + diffX;
+    currentY = currentY + diffY;
+
+    draggableDiv.style.left = currentX + 'px';
+    draggableDiv.style.top = currentY + 'px';
+  }
+});
+
+draggableDiv.addEventListener('touchend', () => {
+  isDragging = false;
+});
     </script>
     </body>
 </html>
