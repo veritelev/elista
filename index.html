@@ -12,6 +12,11 @@
       rel="stylesheet"
     /> -->
     <link href="./styles.css" rel="stylesheet" />
+      <link href="./quill.snow.css" rel="stylesheet" />
+  
+<link href="https://cdn.jsdelivr.net/npm/quill-table-better@1/dist/quill-table-better.css" rel="stylesheet" />
+<script src="./quill.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/quill-table-better@1/dist/quill-table-better.js"></script>
   </head>
   <body>
     <main
@@ -79,11 +84,69 @@
       <div class=" container-m"><iframe src="./iframe.html" frameborder="0" name="idalgo"  class="scaled-iframe" zooming="true"></iframe></div>
       </div>
       <div class="flex flex-col gap-10 my-20">
-        
+        <div id="editor"></div>
+        <div>HTML: </div>
+<button id="btn1" onClick="callMe()">Получить HTML-код</button>
       </div>
       
     </div>
-   
+   <script>
+
+Quill.register({
+    'modules/table-better': QuillTableBetter
+  }, true);
+var toolbarOptions = [
+['bold', 'italic', 'underline', 'strike'],
+['blockquote', 'code-block'],
+[{'header': 1}, {'header': 2}],
+[{'list': 'ordered'}, {'list': 'bullet'}],
+[{'script': 'sub'}, {'script': 'super'}],
+[{'indent': '-1'}, {'indent': '+1'}],
+[{'direction': 'rtl'}],
+[{'size': ['small', false, 'large', 'huge']}],
+['link', 'image', 'video', 'formula'],
+[{'color': []}, {'background': []}],
+[{'font': []}],
+[{'align': []}],
+['table-better']
+];
+var options = {
+  debug: 'info',
+  modules: {
+    toolbar: toolbarOptions,
+    'table-better': {
+        language: 'en_US',
+        menus: ['column', 'row', 'merge', 'table', 'wrap', 'copy', 'delete'],
+        toolbarTable: true
+      },
+      keyboard: {
+        bindings: QuillTableBetter.keyboardBindings
+      }
+  },
+  placeholder: 'Начните свой увлекательный рассказ...',
+  readOnly: false,
+  theme: 'snow'
+};
+var editor = new Quill('#editor', options);
+// function imageHandler() {
+//     var range = this.quill.getSelection();
+//     // var value = prompt('please copy paste the image url here.');
+//     // if(value){
+//     //     this.quill.insertEmbed(range.index, 'img', value, Quill.sources.USER);
+//     // }
+// }
+//   editor.insertText(0, 'Hello', 'bold', true);//set init value
+function callMe() //display current HTML
+  {
+    var html = editor.root.innerHTML;
+    // var myDiv     = document.getElementById("myDiv");
+    // myDiv.innerText = html;
+    var htmlContent = document.getElementById("htmlContent");
+    htmlContent.value = html;
+  }
+ 
+
+</script>
   </body>
 </html>
 
