@@ -97,53 +97,63 @@
     </div>
    <script>
 
-Quill.register({
-    'modules/table-better': QuillTableBetter
-  }, true);
-var toolbarOptions = [
-['bold', 'italic', 'underline', 'strike'],
-['blockquote', 'code-block'],
-[{'header': 1}, {'header': 2}],
-[{'list': 'ordered'}, {'list': 'bullet'}],
-[{'script': 'sub'}, {'script': 'super'}],
-[{'indent': '-1'}, {'indent': '+1'}],
-[{'direction': 'rtl'}],
-[{'size': ['small', false, 'large', 'huge']}],
-['link', 'image', 'video', 'formula'],
-[{'color': []}, {'background': []}],
-[{'font': []}],
-[{'align': []}],
-['table-better']
-];
-var options = {
-  debug: 'info',
+<div id="editor-container"></div>
+<!-- <div id="myDiv" style="border:1 black solid;"></div> -->
+<script>
+
+// Quill.register({
+//     'modules/table-better': QuillTableBetter
+//   }, true);
+// var toolbarOptions = [
+// ['bold', 'italic', 'underline', 'strike'],
+// ['blockquote', 'code-block'],
+// [{'header': 1}, {'header': 2}],
+// [{'list': 'ordered'}, {'list': 'bullet'}],
+// [{'script': 'sub'}, {'script': 'super'}],
+// [{'indent': '-1'}, {'indent': '+1'}],
+// [{'direction': 'rtl'}],
+// [{'size': ['small', false, 'large', 'huge']}],
+// ['link', 'image', 'video', 'formula'],
+// [{'color': []}, {'background': []}],
+// [{'font': []}],
+// [{'align': []}],
+// ['table-better']
+// ];
+// var options = {
+//   debug: 'info',
+//   modules: {
+//     toolbar: toolbarOptions,
+//     'table-better': {
+//         language: 'en_US',
+//         menus: ['column', 'row', 'merge', 'table', 'wrap', 'copy', 'delete'],
+//         toolbarTable: true
+//       },
+//       keyboard: {
+//         bindings: QuillTableBetter.keyboardBindings
+//       }
+//   },
+//   placeholder: 'Начните свой увлекательный рассказ...',
+//   readOnly: false,
+//   theme: 'snow'
+// };
+// var editor = new Quill('#editor', options);
+var quill = new Quill('#editor-container', {
   modules: {
-    toolbar: toolbarOptions,
-    'table-better': {
-        language: 'en_US',
-        menus: ['column', 'row', 'merge', 'table', 'wrap', 'copy', 'delete'],
-        toolbarTable: true
-      },
-      keyboard: {
-        bindings: QuillTableBetter.keyboardBindings
-      }
+    toolbar: [
+      [{ header: [1, 2, false] }],
+      [{ direction: "rtl" }, { align: [] }]
+    ]
   },
-  placeholder: '>',
-  readOnly: false,
-  theme: 'snow'
-};
-var editor = new Quill('#editor', options);
-// function imageHandler() {
-//     var range = this.quill.getSelection();
-//     // var value = prompt('please copy paste the image url here.');
-//     // if(value){
-//     //     this.quill.insertEmbed(range.index, 'img', value, Quill.sources.USER);
-//     // }
-// }
-//   editor.insertText(0, 'Hello', 'bold', true);//set init value
+  placeholder: 'Compose an epic...',
+  theme: 'snow'  // or 'bubble'
+});
+
+quill.format('direction', 'rtl');
+quill.format('align', 'center');
+quill.pasteHTML("<div class='r'>some text</div><b>новыетуфли</b> ");
 function callMe() //display current HTML
   {
-    var html = editor.root.innerHTML;
+    var html = quill.root.innerHTML;
     // var myDiv     = document.getElementById("myDiv");
     // myDiv.innerText = html;
     var htmlContent = document.getElementById("htmlContent");
