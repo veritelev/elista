@@ -757,7 +757,7 @@
 }
 
 #editor {
-    width: 500px;
+    width: 100%;
     margin: 0 auto;
 }
 .ql-snow .ql-picker-label::before {
@@ -969,7 +969,7 @@
   box-sizing: border-box;
   font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   padding: 8px;
-  width: 500px;
+  width: 100%;
   margin: 0 auto;
 }
 .ql-toolbar.ql-snow .ql-formats {
