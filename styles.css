@@ -783,14 +783,7 @@ a {
     }
   }
 }
-.container-m {
-    --scale-factor: 1;
-    overflow: hidden;
-    /* props below are not mandatory */
-    width: 100%;
-    height: 500px;
-    border: 1px solid black;
-}
+
 
 .scaled-iframe {
     transform: scale(var(--scale-factor));
