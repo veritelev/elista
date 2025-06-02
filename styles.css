@@ -627,7 +627,7 @@
 }
 @font-face {
   font-family: "Inter";
-  src: URL('../fonts/Inter/Inter-VariableFont_slnt\,wght.ttf') format('truetype');
+  src: URL('./Inter-VariableFont_slnt\,wght.ttf') format('truetype');
 }
 a {
   height: min-content;
